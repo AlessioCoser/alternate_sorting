@@ -21,7 +21,7 @@ function recursiveSort(list, index = 0) {
     return recursiveSort(swapAtIndex(list,index+1), 0);
   }
 
-  if ((isEven(index) && (curr > next)) || ( isOdd(index) && (curr < next))) {
+  if (isCorrectCouple(curr, next, index)) {
     return recursiveSort(swapAtIndex(list,index), 0);
   }
 
@@ -78,7 +78,7 @@ function isSorted(list) {
     }
     var prev = array[index-1];
 
-    if ((isEven(index) && (prev > item)) || ( isOdd(index) && (prev < item))) {
+    if (isCorrectCouple(prev, item, index)) {
       return acc;
     }
     return false;
@@ -90,6 +90,10 @@ function toString(acc, item, index) {
     return item.toString();
   }
   return acc + ((isEven(index)) ? ">" : "<") + item;
+}
+
+function isCorrectCouple(prev, next, index) {
+  return (isEven(index) && (prev > next)) || ( isOdd(index) && (prev < next));
 }
 
 function isEven(n) {
