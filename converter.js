@@ -55,19 +55,20 @@ function getNextIndex(index, length) {
 }
 
 function tooMuchDuplicates(list) {
-  var countList = list
-  .map((name) => { return {count: 1, name: name} })
-  .reduce(groupDuplicates, {});
+  var tooMuch = list.reduce((acc, item, index, array) => {
+    if (acc === true) {
+      return acc;
+    }
 
-  var duplicates = Object.keys(countList)
-  .filter((a) => countList[a] > Math.floor(list.length/2) );
+    if (acc[item] >= Math.floor(array.length/2)) {
+      return true;
+    }
 
-  return (duplicates.length > 0) && (list.length > 2);
-}
+    acc[item] = (acc[item] || 0) + 1
+    return acc;
+  }, {});
 
-function groupDuplicates(acc, item) {
-  acc[item.name] = (acc[item.name] || 0) + item.count
-  return acc;
+  return (tooMuch === true);
 }
 
 function isSorted(acc, item, index, array) {
