@@ -25,7 +25,7 @@ function recursiveSort(list, index = 0) {
     return recursiveSort(swapAtIndex(list,index), 0);
   }
 
-  return recursiveSort(list, getNextIndex(index, list.length));
+  return recursiveSort(list, incrementIndex(index, list.length));
 }
 
 function swapAtIndex(list, index) {
@@ -37,7 +37,7 @@ function swapAtIndex(list, index) {
 }
 
 function getNextDifferentNumberIndex(list, index) {
-  var next_index = getNextIndex(index, list.length);
+  var next_index = incrementIndex(index, list.length);
 
   if (list[index] !== list[next_index]) {
     return next_index;
@@ -46,7 +46,7 @@ function getNextDifferentNumberIndex(list, index) {
   return getNextDifferentNumberIndex(list, next_index);
 }
 
-function getNextIndex(index, length) {
+function incrementIndex(index, length) {
   index++;
   if (index > length -1) {
     index = 0;
