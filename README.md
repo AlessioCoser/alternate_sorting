@@ -1,3 +1,5 @@
+# Alternate Sorting
+
 Given an array, you have to print a string that
 represents an alternated sorted list like this:
 
