@@ -3,27 +3,24 @@ module.exports = {
 };
 
 function sort(list) {
-  if(tooMuchDuplicates(list)){
+  if (tooMuchDuplicates(list)) {
     throw new Error("Too much duplicates");
-  }else{
+  } else {
     return recursiveSort(list).reduce(toString, "");
   }
 }
 
-function recursiveSort(list, index = 0, recursionCount = 0) {
-  recursionCount++;
+function recursiveSort(list, index = 0) {
   if (list.reduce(isSorted, true)) {
     return list;
   }
   var curr = list[index];
   var next = list[index+1];
 
-  if ((isEven(index) && (curr > next)) ||
-      (!isEven(index) && (curr < next)))
-  {
+  if ((isEven(index) && (curr > next)) || (!isEven(index) && (curr < next))) {
     list[index] = next;
     list[index+1] = curr;
-    return recursiveSort(list, 0, recursionCount);
+    return recursiveSort(list, 0);
   }
 
   if (curr == next) {
@@ -31,14 +28,14 @@ function recursiveSort(list, index = 0, recursionCount = 0) {
     var nextNext = list[pointer];
     list[pointer] = next;
     list[index+1] = nextNext;
-    return recursiveSort(list, 0, recursionCount);
+    return recursiveSort(list, 0);
   }
 
   index++;
   if (index > list.length -1) {
     index = 0;
   }
-  return recursiveSort(list,index, recursionCount);
+  return recursiveSort(list, index);
 }
 
 function getNextDifferentNumberIndex(list, next, pointer) {
@@ -70,14 +67,12 @@ function groupDuplicates(acc, item) {
 }
 
 function isSorted(acc, item, index, array) {
-  if(index == 0) {
+  if (index == 0) {
     return acc;
   }
   var prev = array[index-1];
 
-  if((isEven(index) && (prev <= item)) ||
-     (!isEven(index) && (prev >= item)))
-  {
+  if ((isEven(index) && (prev <= item)) || (!isEven(index) && (prev >= item))) {
     return false;
   }
   return acc;
@@ -87,7 +82,6 @@ function toString(accumulator, item, index) {
   if (accumulator === "") {
     return item.toString();
   }
-
   return accumulator + ((isEven(index)) ? ">" : "<") + item;
 }
 
