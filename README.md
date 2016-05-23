@@ -8,3 +8,8 @@ return: 1<3>2<5>4<6
 
 You must also manage duplicates
 
+## Installation
+    $ git clone https://github.com/AlessioCoser/alternate_sorting.git
+    $ cd alternate_sorting
+    $ npm install
+    $ npm test

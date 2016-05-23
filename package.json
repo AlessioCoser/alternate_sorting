@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Alessio Coser <alessio.coser@xpeppers.com>",
   "scripts": {
-    "test": "mocha converter_test.js"
+    "test": "./node_modules/mocha/bin/mocha converter_test.js"
   },
   "main": "converter.js",
   "repository": {
@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "mocha": "*",
-    "chai": "*"
+    "chai": "*",
+    "to-iso-string": "*"
   }
 }
 
