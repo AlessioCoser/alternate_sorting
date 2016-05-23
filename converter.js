@@ -76,10 +76,10 @@ function isSorted(acc, item, index, array) {
   }
   var prev = array[index-1];
 
-  if ((isEven(index) && (prev <= item)) || (!isEven(index) && (prev >= item))) {
-    return false;
+  if ((isEven(index) && (prev > item)) || ( isOdd(index) && (prev < item))) {
+    return acc;
   }
-  return acc;
+  return false;
 }
 
 function toString(acc, item, index) {
