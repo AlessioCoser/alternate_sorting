@@ -11,7 +11,7 @@ function sort(list) {
 }
 
 function recursiveSort(list, index = 0) {
-  if (list.reduce(isSorted, true)) {
+  if (isSorted(list)) {
     return list;
   }
   var curr = list[index];
@@ -71,16 +71,18 @@ function tooMuchDuplicates(list) {
   return (tooMuch === true);
 }
 
-function isSorted(acc, item, index, array) {
-  if (index == 0) {
-    return acc;
-  }
-  var prev = array[index-1];
+function isSorted(list) {
+  return list.reduce((acc, item, index, array) => {
+    if (index == 0) {
+      return acc;
+    }
+    var prev = array[index-1];
 
-  if ((isEven(index) && (prev > item)) || ( isOdd(index) && (prev < item))) {
-    return acc;
-  }
-  return false;
+    if ((isEven(index) && (prev > item)) || ( isOdd(index) && (prev < item))) {
+      return acc;
+    }
+    return false;
+  }, true);
 }
 
 function toString(acc, item, index) {
