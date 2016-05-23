@@ -37,15 +37,13 @@ function swapAtIndex(list, index) {
 }
 
 function getNextDifferentNumberIndex(list, index) {
-  var next = 0;
-  var curr = list[index];
-  do {
-    index = getNextIndex(index, list.length);
+  var next_index = getNextIndex(index, list.length);
 
-    next = list[index];
-  } while (curr == next);
+  if (list[index] !== list[next_index]) {
+    return next_index;
+  }
 
-  return index;
+  return getNextDifferentNumberIndex(list, next_index);
 }
 
 function getNextIndex(index, length) {
