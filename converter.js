@@ -17,37 +17,43 @@ function recursiveSort(list, index = 0) {
   var curr = list[index];
   var next = list[index+1];
 
-  if ((isEven(index) && (curr > next)) || (!isEven(index) && (curr < next))) {
-    list[index] = next;
-    list[index+1] = curr;
-    return recursiveSort(list, 0);
-  }
-
   if (curr == next) {
-    var pointer = getNextDifferentNumberIndex(list, next, index+1);
-    var nextNext = list[pointer];
-    list[pointer] = next;
-    list[index+1] = nextNext;
-    return recursiveSort(list, 0);
+    return recursiveSort(swapAtIndex(list,index+1), 0);
   }
 
-  index++;
-  if (index > list.length -1) {
-    index = 0;
+  if ((isEven(index) && (curr > next)) || ( isOdd(index) && (curr < next))) {
+    return recursiveSort(swapAtIndex(list,index), 0);
   }
-  return recursiveSort(list, index);
+
+  return recursiveSort(list, getNextIndex(index, list.length));
 }
 
-function getNextDifferentNumberIndex(list, next, pointer) {
-  var nextNext = 0;
-  do {
-    pointer++;
-    if( pointer > list.length -1)
-      pointer = 0;
+function swapAtIndex(list, index) {
+  var pointer = getNextDifferentNumberIndex(list, index);
+  var curr = list[index];
+  list[index] = list[pointer];
+  list[pointer] = curr;
+  return list;
+}
 
-    nextNext = list[pointer];
-  } while (next == nextNext);
-  return pointer
+function getNextDifferentNumberIndex(list, index) {
+  var next = 0;
+  var curr = list[index];
+  do {
+    index = getNextIndex(index, list.length);
+
+    next = list[index];
+  } while (curr == next);
+
+  return index;
+}
+
+function getNextIndex(index, length) {
+  index++;
+  if (index > length -1) {
+    index = 0;
+  }
+  return index;
 }
 
 function tooMuchDuplicates(list) {
@@ -78,13 +84,17 @@ function isSorted(acc, item, index, array) {
   return acc;
 }
 
-function toString(accumulator, item, index) {
-  if (accumulator === "") {
+function toString(acc, item, index) {
+  if (acc == "") {
     return item.toString();
   }
-  return accumulator + ((isEven(index)) ? ">" : "<") + item;
+  return acc + ((isEven(index)) ? ">" : "<") + item;
 }
 
 function isEven(n) {
   return n % 2 == 0
+}
+
+function isOdd(number) {
+  return !isEven(number);
 }
