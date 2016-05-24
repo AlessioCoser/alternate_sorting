@@ -29,21 +29,21 @@ function recursiveSort(list, index = 0) {
 }
 
 function swapAtIndex(list, index) {
-  var pointer = getNextDifferentNumberIndex(list, index);
+  var pointer = getIndexOfNextDifferentNumber(list, index);
   var curr = list[index];
   list[index] = list[pointer];
   list[pointer] = curr;
   return list;
 }
 
-function getNextDifferentNumberIndex(list, index) {
+function getIndexOfNextDifferentNumber(list, index) {
   var nextIndex = incrementIndex(index, list.length);
 
   if (list[index] !== list[nextIndex]) {
     return nextIndex;
   }
 
-  return getNextDifferentNumberIndex(list, nextIndex);
+  return getIndexOfNextDifferentNumber(list, nextIndex);
 }
 
 function incrementIndex(index, length) {
