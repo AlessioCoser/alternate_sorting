@@ -4,25 +4,25 @@ module.exports = {
 
 function sort(list) {
   if (tooMuchDuplicates(list)) {
-    throw new Error("Too much duplicates");
+    throw new Error('Too much duplicates');
   } else {
-    return recursiveSort(list).reduce(toString, "");
+    return recursiveSort(list).reduce(toString, '');
   }
 }
 
 function recursiveSort(list, index = 0) {
-  if (isSorted(list)) {
+  if (isAlternateSorted(list)) {
     return list;
   }
   var curr = list[index];
   var next = list[index+1];
 
   if (curr == next) {
-    return recursiveSort(swapAtIndex(list,index+1), 0);
+    return recursiveSort(swapAtIndex(list, index+1), 0);
   }
 
   if (isCorrectCouple(curr, next, index)) {
-    return recursiveSort(swapAtIndex(list,index), 0);
+    return recursiveSort(swapAtIndex(list, index), 0);
   }
 
   return recursiveSort(list, incrementIndex(index, list.length));
@@ -37,13 +37,13 @@ function swapAtIndex(list, index) {
 }
 
 function getNextDifferentNumberIndex(list, index) {
-  var next_index = incrementIndex(index, list.length);
+  var nextIndex = incrementIndex(index, list.length);
 
-  if (list[index] !== list[next_index]) {
-    return next_index;
+  if (list[index] !== list[nextIndex]) {
+    return nextIndex;
   }
 
-  return getNextDifferentNumberIndex(list, next_index);
+  return getNextDifferentNumberIndex(list, nextIndex);
 }
 
 function incrementIndex(index, length) {
@@ -68,10 +68,10 @@ function tooMuchDuplicates(list) {
     return acc;
   }, {});
 
-  return (tooMuch === true);
+  return tooMuch === true;
 }
 
-function isSorted(list) {
+function isAlternateSorted(list) {
   return list.reduce((acc, item, index, array) => {
     if (index == 0) {
       return acc;
@@ -86,10 +86,10 @@ function isSorted(list) {
 }
 
 function toString(acc, item, index) {
-  if (acc == "") {
+  if (acc == '') {
     return item.toString();
   }
-  return acc + ((isEven(index)) ? ">" : "<") + item;
+  return acc + ((isEven(index)) ? '>' : '<') + item;
 }
 
 function isCorrectCouple(prev, next, index) {
