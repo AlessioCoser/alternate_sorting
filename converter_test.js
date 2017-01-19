@@ -1,6 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 var converter = require("./converter");
+const {test: describe, test: it} = require('m.test')
 
 describe('Converter orderedPattern', function() {
   it('empty array should return empty string', function() {

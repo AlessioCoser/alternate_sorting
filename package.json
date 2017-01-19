@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "author": "Alessio Coser <alessio.coser@xpeppers.com>",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha converter_test.js"
+    "test": "m.test converter_test.js"
   },
   "main": "converter.js",
   "repository": {
@@ -11,9 +11,8 @@
     "url": "https://github.com/AlessioCoser/alternate_sorting"
   },
   "dependencies": {
-    "mocha": "*",
     "chai": "*",
+    "m.test": "0.0.26",
     "to-iso-string": "*"
   }
 }
-
